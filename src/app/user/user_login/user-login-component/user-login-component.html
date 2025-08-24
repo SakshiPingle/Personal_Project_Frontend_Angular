@@ -1,18 +1,28 @@
 <div class="login-container">
   <mat-card class="login-card">
     <h2>Login</h2>
-    <form>
+    <form #userLogin="ngForm" (submit)="userLoginFunction(userLogin)">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>
-        <input matInput type="email" placeholder="Enter your email">
+        <input matInput type="email" placeholder="Enter your email" name="email" ngModel #email="ngModel" required>
+         @if((userLogin.submitted && email.invalid) || email.touched){
+          <mat-error>
+            Valid email is required
+          </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Enter your password">
+        <input matInput type="password" placeholder="Enter your password" name="password" ngModel #password="ngModel" required>
+         @if((userLogin.submitted && password.invalid) || password.touched){
+          <mat-error >
+            Enter Valid Password 
+          </mat-error>
+        }
       </mat-form-field>
 
-      <button mat-raised-button color="primary" class="full-width">Login</button>
+      <button type="submit" mat-raised-button color="primary" class="full-width" [disabled]="userLogin.invalid ">Login</button>
     </form>
   </mat-card>
 </div>

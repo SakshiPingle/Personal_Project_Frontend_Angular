@@ -1,18 +1,28 @@
 <div class="form-container">
   <mat-card class="form-card">
     <h2>Create Category</h2>
-    <form>
+    <form #AddCategoryForm="ngForm" (submit)="AddCategory(AddCategoryForm)">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Category Name</mat-label>
-        <input matInput type="text" placeholder="Enter category name">
+        <input matInput type="text" placeholder="Enter category name" ngModel name="category_name" #category_name="ngModel" required>
+        @if((AddCategoryForm.submitted && category_name.invalid) || category_name.touched){
+          <mat-error>
+            Valid category is required
+          </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Description</mat-label>
-        <textarea matInput placeholder="Enter category description"></textarea>
+        <textarea matInput placeholder="Enter category description" ngModel name="category_description" #category_description="ngModel" required></textarea>
+         @if((AddCategoryForm.submitted && category_description.invalid) || category_description.touched){
+          <mat-error>
+            Valid category is required
+          </mat-error>
+        }
       </mat-form-field>
 
-      <button mat-raised-button color="accent" class="full-width">Create Category</button>
+      <button [disabled]="AddCategoryForm.invalid " type="submit" mat-raised-button color="accent" class="full-width">Create Category</button>
     </form>
   </mat-card>
 </div>

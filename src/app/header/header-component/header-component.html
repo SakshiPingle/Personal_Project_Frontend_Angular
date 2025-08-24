@@ -3,8 +3,15 @@
   <span class="spacer"></span>
   <a mat-button routerLink="/">Products</a>
   <a mat-button routerLink="/category">Categories</a>
-  <a mat-button routerLink="/add-product">Add Product</a>
-  <a mat-button routerLink="/add-categpry">Add Category</a>
+  @if(userIsAuthenticated){
+    <a mat-button routerLink="/add-product">Add Product</a>
+    <a mat-button routerLink="/add-categpry">Add Category</a>
+  }
+   @if(!userIsAuthenticated){
   <a mat-button routerLink="/login">Login</a>
   <a mat-button routerLink="/registration">Register</a>
+  }
+  @if(userIsAuthenticated){
+      <a mat-button (click)="onLogout()"> Logout</a>
+  }
 </mat-toolbar>

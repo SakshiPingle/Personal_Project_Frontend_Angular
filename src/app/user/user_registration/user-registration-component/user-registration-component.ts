@@ -29,13 +29,11 @@ constructor(
       },
       error: (err) => console.error(err)
     });
-      
-
-      // Proceed with registration
     } else {
-      // Optionally show error
       alert("Error While Registration Of User")
     }
   }
+
+  
 }
 

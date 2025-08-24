@@ -11,10 +11,12 @@
         <p>{{ product.description }}</p>
         <p><strong>Price:</strong> ₹{{ product.price }}</p>
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary">Edit</button>
-        <button mat-stroked-button color="warn">Delete</button>
-      </mat-card-actions>
+      @if(userIsAuthenticated){
+        <mat-card-actions>
+          <button mat-raised-button color="primary">Edit</button>
+          <button mat-stroked-button color="warn">Delete</button>
+        </mat-card-actions>
+      }
     </mat-card>
   </div>
 </div>
