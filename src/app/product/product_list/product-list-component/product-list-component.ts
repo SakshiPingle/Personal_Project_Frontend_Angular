@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './product-list-component.css'
 })
 export class ProductListComponent {
-
+products=[{
+  name:'bubu',
+  category:'animal',
+  description:'abc',
+  price:23,
+}]
 }

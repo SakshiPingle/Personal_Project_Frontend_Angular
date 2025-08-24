@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './add-product-component.css'
 })
 export class AddProductComponent {
-
+categories=[{
+  id:1,
+  name:'lklkvn'
+}]
 }

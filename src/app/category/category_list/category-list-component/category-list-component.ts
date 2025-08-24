@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './category-list-component.css'
 })
 export class CategoryListComponent {
-
+categories=[{
+  name:'acijw',
+  description:'jkewoif'
+}]
 }

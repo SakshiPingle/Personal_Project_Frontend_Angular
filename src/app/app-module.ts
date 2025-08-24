@@ -10,11 +10,16 @@ import { AddProductComponent } from './product/add_product/add-product-component
 import { AddCategoryComponent } from './category/add_category/add-category-component/add-category-component';
 import { CategoryListComponent } from './category/category_list/category-list-component/category-list-component';
 import { HeaderComponent } from './header/header-component/header-component';
+// forms
+import { FormsModule } from '@angular/forms'; // Import FormsModule to use ngModel
+import { ReactiveFormsModule } from '@angular/forms';
+
 // imports of angular material 
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
+import {MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 @NgModule({
   declarations: [
     App,
@@ -28,11 +33,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()

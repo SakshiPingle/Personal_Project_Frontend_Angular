@@ -1,12 +1,14 @@
-<h2>Category List</h2>
-<div class="grid">
-  <mat-card  class="category-card">
-    <mat-card-header>
-      <mat-card-title>name</mat-card-title>
-    </mat-card-header>
+<div class="category-list">
+  <h2>Categories</h2>
+
+  <mat-card class="category-card" *ngFor="let category of categories">
+    <mat-card-title>{{ category.name }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ category.description }}</p>
+    </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary">Update</button>
-      <button mat-raised-button color="warn">Delete</button>
+      <button mat-raised-button color="primary">Edit</button>
+      <button mat-stroked-button color="warn">Delete</button>
     </mat-card-actions>
   </mat-card>
 </div>
