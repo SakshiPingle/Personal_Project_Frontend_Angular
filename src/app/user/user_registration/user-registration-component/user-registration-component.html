@@ -1,28 +1,38 @@
 <div class="register-container">
   <mat-card class="register-card">
     <h2>Register</h2>
-    <form>
+    <form #userRegistration="ngForm" (submit)="registerUser(userRegistration)">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Name</mat-label>
-        <input matInput type="text" placeholder="Enter your name">
+        <input matInput type="text" placeholder="Enter your name" ngModel name="user_name" #user_name="ngModel" required>
+        @if((userRegistration.submitted && user_name.invalid) || user_name.touched){
+          <mat-error>
+            User Name is required
+          </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>
-        <input matInput type="email" placeholder="Enter your email">
+        <input matInput type="email" placeholder="Enter your email" ngModel name="email" #email="ngModel" required>
+        @if((userRegistration.submitted && email.invalid) || email.touched){
+          <mat-error>
+            Valid email is required
+          </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Enter your password">
+        <input matInput type="password" placeholder="Enter your password" ngModel name="password" #password="ngModel" required>
+        @if((userRegistration.submitted && password.invalid) || password.touched){
+          <mat-error >
+            Enter Valid Password 
+          </mat-error>
+        }
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Confirm Password</mat-label>
-        <input matInput type="password" placeholder="Confirm password">
-      </mat-form-field>
-
-      <button mat-raised-button color="accent" class="full-width">Register</button>
+      <button mat-raised-button color="accent" class="full-width" type="submit" [disabled]="userRegistration.invalid ">Register</button>
     </form>
   </mat-card>
 </div>

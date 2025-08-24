@@ -20,7 +20,9 @@ import {MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-@NgModule({
+
+// for routing 
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';@NgModule({
   declarations: [
     App,
     UserRegistrationComponent,
@@ -43,7 +45,8 @@ import {MatInputModule} from '@angular/material/input';
     MatInputModule
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+    provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [App]
 })
