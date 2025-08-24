@@ -11,9 +11,15 @@ export class ProductService {
   private router = inject(Router); 
   private baseUrl = 'http://localhost:3034'; //backend base url
 
-  createProduct(){
-    // this.http.post(`this.baseUrl/`)
-   
+  createProduct(product_details:any){
+    return this.http.post(`${this.baseUrl}/create_product`,product_details)
+    .subscribe((res)=>{
+       alert("New Product Added")
+       this.router.navigate(['Product'])
+    },error => {
+    alert("Error Adding New Product")
+    this.router.navigate(['Product'])
+  })   
   }
 
   getProductDetails(){
