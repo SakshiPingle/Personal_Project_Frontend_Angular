@@ -1,0 +1,27 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #3f51b5; /* Material Primary */
+  color: white;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+a[mat-button] {
+  color: white;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+
+a[mat-button]:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}

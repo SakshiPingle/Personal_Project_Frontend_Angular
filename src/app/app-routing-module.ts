@@ -8,14 +8,14 @@ import { AddCategoryComponent } from './category/add_category/add-category-compo
 import { AddProductComponent } from './product/add_product/add-product-component/add-product-component';
 const routes: Routes = [
   {path:'',component:ProductListComponent},
-  {path:'/login',component:UserLoginComponent},
-  {path:'/registration',component:UserRegistrationComponent},
-  {path:'/category',component:CategoryListComponent},
-  {path:'/add-categpry',component:AddCategoryComponent},
-  {path:'/edit-category',component:AddCategoryComponent},
-  {path:'/product',component:ProductListComponent},
-  {path:'/add-product',component:AddProductComponent},
-  {path:'/edit-product',component:AddProductComponent},
+  {path:'login',component:UserLoginComponent},
+  {path:'registration',component:UserRegistrationComponent},
+  {path:'category',component:CategoryListComponent},
+  {path:'add-categpry',component:AddCategoryComponent},
+  {path:'edit-category',component:AddCategoryComponent},
+  {path:'product',component:ProductListComponent},
+  {path:'add-product',component:AddProductComponent},
+  {path:'edit-product',component:AddProductComponent},
 ];
 
 @NgModule({
