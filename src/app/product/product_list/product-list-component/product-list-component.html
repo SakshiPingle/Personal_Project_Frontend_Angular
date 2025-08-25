@@ -1,6 +1,19 @@
 <div class="product-list">
   <h2>Products</h2>
-
+  <!-- sorting -->
+   <mat-form-field appearance="outline">
+    <mat-label>Sort by Price</mat-label>
+    <mat-select [(ngModel)]="sortOrder" (selectionChange)="onSortChange($event.value)">
+      <mat-option value="asc">Low to High</mat-option>
+      <mat-option value="desc">High to Low</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- search -->
+   <mat-form-field appearance="outline" class="full-width searchbox">
+    <mat-label>Search Products or Categories</mat-label>
+    <input matInput [(ngModel)]="search" (keyup)="onSearchChange()" placeholder="Enter keyword" />
+  </mat-form-field>
+  <!-- form fields -->
   <div class="product-grid">
     <mat-card class="product-card" *ngFor="let product of products_list">
       <mat-card-header>
@@ -19,4 +32,13 @@
       }
     </mat-card>
   </div>
+  @if(products_list.length > 0){
+    <mat-paginator 
+      [length]="totalProductLength" 
+      [pageSize]="productPageSizeSelectedForPagination"
+      [pageSizeOptions]="pageSizeOptionsForPagination" 
+      (page)="onChangedPage($event)"
+      ></mat-paginator>
+  }
+
 </div>

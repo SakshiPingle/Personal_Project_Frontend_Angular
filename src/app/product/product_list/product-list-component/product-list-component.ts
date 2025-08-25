@@ -3,6 +3,7 @@ import { AuthService } from '../../../services/auth/auth-service';
 import {Subscription} from 'rxjs'
 import { ProductService } from '../../../services/product/product-service';
 import { Router } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-product-list-component',
@@ -11,7 +12,18 @@ import { Router } from '@angular/router';
   styleUrl: './product-list-component.css'
 })
 export class ProductListComponent implements OnInit,OnDestroy{
+// for pagination 
+totalProductLength = 0;
+productPageSizeSelectedForPagination = 3
+pageSizeOptionsForPagination = [3,5,10];
+currentPage = 1;
+// sorting config
+sortOrder = 'asc';  // default
+// products that we get from backend
 products_list : any ;
+// search
+search:any;
+
   constructor(
     private authService : AuthService,
     private productService : ProductService,
@@ -27,13 +39,16 @@ products_list : any ;
   .subscribe(res =>{
     this.userIsAuthenticated = res
   })
-  this.getAllProducts();
+  this.getAllProducts(this.productPageSizeSelectedForPagination , this.currentPage , this.sortOrder,this.search);
  }
 
- getAllProducts(){
-  this.productService.getAllProducts()
+ getAllProducts(pageSize : any , currentPage :any , sortType :any , search :any){
+  this.productService.getAllProducts(pageSize , currentPage , sortType , search)
   .subscribe((res:any)=>{
+     console.log("res.pagination",res.pagination)
    this.products_list = res.data;
+   this.totalProductLength = res.totalItems;
+
   })
  }
 
@@ -41,13 +56,32 @@ products_list : any ;
   this.productService.deleteProduct(product)
   .subscribe(()=>{
     console.log("Product Deleted")
-    this.getAllProducts();
+    this.getAllProducts(this.productPageSizeSelectedForPagination , this.currentPage , this.sortOrder ,this.search);
      this.router.navigate(['product'])
   })
  }
 
+ onChangedPage(pageData : PageEvent){
+   this.currentPage = pageData.pageIndex + 1;
+     this.productPageSizeSelectedForPagination = pageData.pageSize
+     this.getAllProducts(this.productPageSizeSelectedForPagination  , this.currentPage , this.sortOrder , this.search);
+ }
+
+ onSortChange(order: string){
+  this.sortOrder = order;
+  this.getAllProducts(this.productPageSizeSelectedForPagination  , this.currentPage , this.sortOrder , this.search);
+ }
+
+
+onSearchChange(){
+  this.currentPage = 1;
+  this.getAllProducts(this.productPageSizeSelectedForPagination  , this.currentPage , this.sortOrder , this.search);
+}
+
  ngOnDestroy(){
   this.loginListerSub.unsubscribe();
  }
+
+ 
 
 }

@@ -26,8 +26,8 @@ export class ProductService {
     return this.http.get(`${this.baseUrl}/get_edit_product/${product_id}`)
   }
 
-  getAllProducts(){
-   return this.http.get(`${this.baseUrl}/get_product_list`)
+  getAllProducts(pageSize :any , currentPage : any , sortType :any, search:any){
+   return this.http.get(`${this.baseUrl}/get_product_list/${pageSize}/${currentPage}/${sortType}?search=${search || ''}`)
   }
 
   updateProduct(product_details:any){
