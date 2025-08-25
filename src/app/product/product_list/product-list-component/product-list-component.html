@@ -13,6 +13,16 @@
     <mat-label>Search Products or Categories</mat-label>
     <input matInput [(ngModel)]="search" (keyup)="onSearchChange()" placeholder="Enter keyword" />
   </mat-form-field>
+
+  <!-- file upload -->
+   <div>
+  <h2>Upload Excel File</h2>
+
+  <input type="file" (change)="onFileSelected($event)" accept=".xlsx,.xls" />
+  <button (click)="uploadFile()">Upload</button>
+
+  <p>{{ message }}</p>
+</div>
   <!-- form fields -->
   <div class="product-grid">
     <mat-card class="product-card" *ngFor="let product of products_list">

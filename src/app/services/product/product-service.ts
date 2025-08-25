@@ -1,6 +1,7 @@
 import { Injectable,inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -40,5 +41,11 @@ export class ProductService {
   deleteProduct(product:any){
    let product_id = product.id;
     return this.http.delete(`${this.baseUrl}/delete_product/${product_id}`)
+  }
+
+  uploadExcel(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append("file", file);
+    return this.http.post(`${this.baseUrl}/upload-excel`, formData);
   }
 }

@@ -23,6 +23,10 @@ sortOrder = 'asc';  // default
 products_list : any ;
 // search
 search:any;
+// file upload 
+selectedFile?: File;
+message = "";
+
 
   constructor(
     private authService : AuthService,
@@ -77,6 +81,30 @@ onSearchChange(){
   this.currentPage = 1;
   this.getAllProducts(this.productPageSizeSelectedForPagination  , this.currentPage , this.sortOrder , this.search);
 }
+
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+ uploadFile() {
+    if (!this.selectedFile) {
+      this.message = "Please select a file first";
+      return;
+    }
+    this.productService.uploadExcel(this.selectedFile).subscribe({
+    next: (res) => {
+    this.message = res.message + " (" + res.totalRecords + " records)";
+    this.currentPage = 1;
+    this.getAllProducts(this.productPageSizeSelectedForPagination  , this.currentPage , this.sortOrder , this.search);
+  },
+  error: () => {
+    this.message = "Upload failed";
+  }
+});
+  }
+
+  
 
  ngOnDestroy(){
   this.loginListerSub.unsubscribe();
