@@ -29,9 +29,8 @@ export class AddCategoryComponent implements OnInit{
            let category_id = paramMap.get('id')
            this.categoryService.getCategorydetailsById(category_id)
            .subscribe((data:any)=>{
-            console.log("data",data)
-            this.categoryDetailsForEdit = data.data;;
-
+            console.log("data",data.data)
+            this.categoryDetailsForEdit = data.data[0];
            })
         }else{
           console.log("############")
@@ -47,14 +46,12 @@ export class AddCategoryComponent implements OnInit{
       console.log("this.mode",this.mode)
       if(this.mode == 'create'){
         let category_details = form.value;
-        // const randomNumber = Math.floor(10000 + Math.random() * 90000);
-        // category_details.uniqueID = randomNumber
         this.categoryService.createCategory(category_details)
       }else if (this.mode == 'edit'){
         let category_details = form.value;
-        category_details.uniqueID =  this.categoryDetailsForEdit.id;
+        category_details.id =  this.categoryDetailsForEdit.id;
         console.log(category_details)
-        this.categoryService.updateCategory(this.categoryDetailsForEdit)
+        this.categoryService.updateCategory(category_details)
   
       }
       }else {

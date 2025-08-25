@@ -22,16 +22,19 @@ export class ProductService {
   })   
   }
 
-  getProductDetailsById(){
-    
+  getProductDetailsById(product_id:any){
+    return this.http.get(`${this.baseUrl}/get_edit_product/${product_id}`)
   }
 
   getAllProducts(){
    return this.http.get(`${this.baseUrl}/get_product_list`)
   }
 
-  updateProduct(){
-
+  updateProduct(product_details:any){
+        return this.http.put(`${this.baseUrl}/update_product`,product_details)
+      .subscribe((data)=>{
+           this.router.navigate(['product'])
+        })
   }
 
   deleteProduct(product:any){

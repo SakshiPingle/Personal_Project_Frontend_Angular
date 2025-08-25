@@ -5,7 +5,7 @@
     <mat-card-title>{{ category.category_name }}</mat-card-title>
     @if(userIsAuthenticated){
       <mat-card-actions>
-        <button mat-raised-button color="primary" [routerLink]="['/edit-category',category.category_id]">Edit</button>
+        <button mat-raised-button color="primary" [routerLink]="['/edit-category',category.id]">Edit</button>
         <button mat-stroked-button color="warn" (click)="deleteCategory(category)">Delete</button>
       </mat-card-actions>
     }

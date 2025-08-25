@@ -1,6 +1,11 @@
 <div class="form-container">
   <mat-card class="form-card">
+    @if(mode == 'create'){
     <h2>Create Product</h2>
+    } @if(mode == 'edit'){
+    <h2>Edit Product</h2>
+    }
+
     <form #AddProductForm="ngForm" (submit)="AddProduct(AddProductForm)">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Product Name</mat-label>
@@ -12,6 +17,7 @@
           name="product_name"
           #product_name="ngModel"
           required
+          [(ngModel)]="productDetailsForEdit.product_name"
         />
         @if((AddProductForm.submitted && product_name.invalid) || product_name.touched){
         <mat-error> Valid category is required </mat-error>
@@ -27,6 +33,7 @@
           name="product_description"
           #product_description="ngModel"
           required
+          [(ngModel)]="productDetailsForEdit.product_description"
         ></textarea>
         @if((AddProductForm.submitted && product_description.invalid) ||
         product_description.touched){
@@ -36,7 +43,7 @@
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Category</mat-label>
-        <mat-select ngModel name="category" #category="ngModel" required>
+        <mat-select ngModel name="category" #category="ngModel" required [(ngModel)]="productDetailsForEdit.categoryId">
           <mat-option *ngFor="let cat of category_list" [value]="cat.id">
             {{ cat.category_name }}
           </mat-option>
@@ -56,12 +63,13 @@
           name="product_price"
           #product_price="ngModel"
           required
+          [(ngModel)]="productDetailsForEdit.product_price"
         />
         @if((AddProductForm.submitted && product_price.invalid) || product_price.touched){
         <mat-error> Valid category is required </mat-error>
         }
       </mat-form-field>
-
+      @if(mode == 'create'){
       <button
         [disabled]="AddProductForm.invalid"
         mat-raised-button
@@ -70,6 +78,17 @@
       >
         Create Product
       </button>
+      } 
+      @if(mode == 'edit'){
+      <button
+        [disabled]="AddProductForm.invalid"
+        mat-raised-button
+        color="accent"
+        class="full-width"
+      >
+        Edit Product
+      </button>
+      }
     </form>
   </mat-card>
 </div>
