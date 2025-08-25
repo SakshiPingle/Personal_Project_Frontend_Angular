@@ -14,8 +14,8 @@ import { PageEvent } from '@angular/material/paginator';
 export class ProductListComponent implements OnInit,OnDestroy{
 // for pagination 
 totalProductLength = 0;
-productPageSizeSelectedForPagination = 3
-pageSizeOptionsForPagination = [3,5,10];
+productPageSizeSelectedForPagination = 10
+pageSizeOptionsForPagination = [10,20,50];
 currentPage = 1;
 // sorting config
 sortOrder = 'asc';  // default
@@ -103,6 +103,11 @@ onSearchChange(){
   }
 });
   }
+
+openFilePicker(fileInput: HTMLInputElement) {
+  fileInput.value = ''; // reset so user can reselect same file
+  fileInput.click();
+}
 
   
 

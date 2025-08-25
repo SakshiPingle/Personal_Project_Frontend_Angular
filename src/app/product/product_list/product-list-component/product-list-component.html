@@ -1,54 +1,71 @@
 <div class="product-list">
-  <h2>Products</h2>
-  <!-- sorting -->
-   <mat-form-field appearance="outline">
-    <mat-label>Sort by Price</mat-label>
-    <mat-select [(ngModel)]="sortOrder" (selectionChange)="onSortChange($event.value)">
-      <mat-option value="asc">Low to High</mat-option>
-      <mat-option value="desc">High to Low</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <!-- search -->
-   <mat-form-field appearance="outline" class="full-width searchbox">
-    <mat-label>Search Products or Categories</mat-label>
-    <input matInput [(ngModel)]="search" (keyup)="onSearchChange()" placeholder="Enter keyword" />
-  </mat-form-field>
+@if(products_list.length > 0){
+  <h2>Product List</h2>
+} 
+@if(products_list.length <= 0){
+  <h2>Add Products</h2>
+}
 
-  <!-- file upload -->
-   <div>
-  <h2>Upload Excel File</h2>
 
-  <input type="file" (change)="onFileSelected($event)" accept=".xlsx,.xls" />
-  <button (click)="uploadFile()">Upload</button>
 
-  <p>{{ message }}</p>
-</div>
-  <!-- form fields -->
-  <div class="product-grid">
-    <mat-card class="product-card" *ngFor="let product of products_list">
-      <mat-card-header>
-        <mat-card-title>Product Name : {{ product.product_name }}</mat-card-title>
-        <mat-card-subtitle>Product Category : {{ product.category.category_name }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p>Product Description : {{ product.product_description }}</p>
-        <p><strong>Price:</strong> ₹{{ product.product_price }}</p>
-      </mat-card-content>
-      @if(userIsAuthenticated){
+  <div class="toolbar">
+   @if(products_list.length > 0){
+    <!-- sorting -->
+    <mat-form-field appearance="outline">
+      <mat-label>Sort by Price</mat-label>
+      <mat-select [(ngModel)]="sortOrder" (selectionChange)="onSortChange($event.value)">
+        <mat-option value="asc">Low to High</mat-option>
+        <mat-option value="desc">High to Low</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- search -->
+    <mat-form-field appearance="outline" class="searchbox">
+      <mat-label>Search Products or Categories</mat-label>
+      <input matInput [(ngModel)]="search" (keyup)="onSearchChange()" placeholder="Enter keyword" />
+    </mat-form-field>
+  }
+    <!-- file upload -->
+    <div class="upload-section">
+      <input type="file" #fileInput (change)="onFileSelected($event)" accept=".xlsx,.xls" hidden />
+      <button mat-raised-button color="accent" (click)="openFilePicker(fileInput)">Choose File</button>
+      <span class="file-name" *ngIf="selectedFile">{{ selectedFile.name }}</span>
+      <button mat-raised-button color="primary" (click)="uploadFile()" [disabled]="!selectedFile">Upload</button>
+    </div>
+  </div>
+
+  <!-- message -->
+  <p class="upload-message">{{ message }}</p>
+
+  <!-- scrollable products -->
+  <div class="product-grid-container">
+    <div class="product-grid">
+      <mat-card class="product-card" *ngFor="let product of products_list">
+        <mat-card-header>
+          <mat-card-title>Product Name : {{ product.product_name }}</mat-card-title>
+          <mat-card-subtitle>Product Category : {{ product.category.category_name }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Product Description : {{ product.product_description }}</p>
+          <p><strong>Price:</strong> ₹{{ product.product_price }}</p>
+        </mat-card-content>
+        @if(userIsAuthenticated){
         <mat-card-actions>
-          <button mat-raised-button color="primary" [routerLink]="['/edit-product',product.id]">Edit</button>
+          <button mat-raised-button color="primary" [routerLink]="['/edit-product', product.id]">Edit</button>
           <button mat-stroked-button color="warn" (click)="deleteProduct(product)">Delete</button>
         </mat-card-actions>
-      }
-    </mat-card>
+        }
+      </mat-card>
+    </div>
   </div>
-  @if(products_list.length > 0){
-    <mat-paginator 
-      [length]="totalProductLength" 
-      [pageSize]="productPageSizeSelectedForPagination"
-      [pageSizeOptions]="pageSizeOptionsForPagination" 
-      (page)="onChangedPage($event)"
-      ></mat-paginator>
-  }
 
+  <!-- paginator stays fixed below scroll -->
+  @if(products_list.length > 0){
+  <mat-paginator
+    [length]="totalProductLength"
+    [pageSize]="productPageSizeSelectedForPagination"
+    [pageSizeOptions]="pageSizeOptionsForPagination"
+    (page)="onChangedPage($event)"
+  ></mat-paginator>
+  }
 </div>

@@ -1,10 +1,29 @@
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;              /* 👈 force full height */
+  overflow: hidden;          /* 👈 stop page-level scroll */
   font-family: Roboto, Arial, sans-serif;
   background-color: #f5f5f5;
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;              /* 👈 container takes full page height */
   padding: 20px;
+  box-sizing: border-box;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;                   /* 👈 grow to fill available height */
+  overflow: hidden;          /* 👈 prevent extra scroll */
+}
+
+.product-grid-container {
+  flex: 1;                   /* 👈 take up remaining space */
+  overflow-y: auto;          /* 👈 only this section scrolls */
+  padding: 10px 0;
 }
