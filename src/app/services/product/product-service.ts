@@ -15,22 +15,27 @@ export class ProductService {
     return this.http.post(`${this.baseUrl}/create_product`,product_details)
     .subscribe((res)=>{
        alert("New Product Added")
-       this.router.navigate(['Product'])
-    },error => {
+       this.router.navigate(['product'])
+    },(error) => {
     alert("Error Adding New Product")
-    this.router.navigate(['Product'])
+    this.router.navigate(['product'])
   })   
   }
 
-  getProductDetails(){
+  getProductDetailsById(){
+    
+  }
 
+  getAllProducts(){
+   return this.http.get(`${this.baseUrl}/get_product_list`)
   }
 
   updateProduct(){
 
   }
 
-  deleteProduct(){
-
+  deleteProduct(product:any){
+   let product_id = product.id;
+    return this.http.delete(`${this.baseUrl}/delete_product/${product_id}`)
   }
 }

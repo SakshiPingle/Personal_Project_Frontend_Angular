@@ -15,9 +15,7 @@ export class AddCategoryComponent implements OnInit{
     mode = 'create'
     categoryDetailsForEdit:any;
     constructor(
-    private authService:AuthService,
     private categoryService : CategoryService,
-    private router:Router,
     private route: ActivatedRoute,
   ){}
 
@@ -25,10 +23,10 @@ export class AddCategoryComponent implements OnInit{
     this.categoryDetailsForEdit = { category_name: '' };
      this.route.paramMap.subscribe((paramMap : any) => {
         console.log("paramMap",paramMap)
-        if(paramMap.has('category_id')){
+        if(paramMap.has('id')){
           console.log("****************")
            this.mode = 'edit'
-           let category_id = paramMap.get('category_id')
+           let category_id = paramMap.get('id')
            this.categoryService.getCategorydetailsById(category_id)
            .subscribe((data:any)=>{
             console.log("data",data)
@@ -49,12 +47,12 @@ export class AddCategoryComponent implements OnInit{
       console.log("this.mode",this.mode)
       if(this.mode == 'create'){
         let category_details = form.value;
-        const randomNumber = Math.floor(10000 + Math.random() * 90000);
-        category_details.uniqueID = randomNumber
+        // const randomNumber = Math.floor(10000 + Math.random() * 90000);
+        // category_details.uniqueID = randomNumber
         this.categoryService.createCategory(category_details)
       }else if (this.mode == 'edit'){
         let category_details = form.value;
-        category_details.uniqueID =  this.categoryDetailsForEdit.category_id;
+        category_details.uniqueID =  this.categoryDetailsForEdit.id;
         console.log(category_details)
         this.categoryService.updateCategory(this.categoryDetailsForEdit)
   

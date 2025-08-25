@@ -37,7 +37,7 @@ export class CategoryService {
   }
 
   deleteCategory(category :any){
-      let category_id = category.category_id;
+      let category_id = category.id;
       return this.http.delete(`${this.baseUrl}/delete_category/${category_id}`)
       
   }

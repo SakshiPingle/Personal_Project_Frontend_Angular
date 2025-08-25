@@ -20,7 +20,8 @@ import {MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 // for routing 
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';@NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

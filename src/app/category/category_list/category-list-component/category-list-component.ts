@@ -43,8 +43,8 @@ private loginListerSub = new Subscription;
    this.categoryService.deleteCategory(category)
    .subscribe((res)=>{
         console.log("Category deleted")
-        this.router.navigate(['category'])
         this.getAllCategory()
+        this.router.navigate(['category'])
       })
  }
 

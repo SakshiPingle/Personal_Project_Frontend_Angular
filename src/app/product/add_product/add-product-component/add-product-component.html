@@ -4,35 +4,72 @@
     <form #AddProductForm="ngForm" (submit)="AddProduct(AddProductForm)">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Product Name</mat-label>
-        <input matInput type="text" placeholder="Enter product name" ngModel name="product_name" #product_name="ngModel" required>
-         @if((AddProductForm.submitted && product_name.invalid) || product_name.touched){
-          <mat-error>
-            Valid category is required
-          </mat-error>
+        <input
+          matInput
+          type="text"
+          placeholder="Enter product name"
+          ngModel
+          name="product_name"
+          #product_name="ngModel"
+          required
+        />
+        @if((AddProductForm.submitted && product_name.invalid) || product_name.touched){
+        <mat-error> Valid category is required </mat-error>
         }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Description</mat-label>
-        <textarea matInput placeholder="Enter product description" ngModel name="product_description" #product_description="ngModel" required></textarea>
-         @if((AddProductForm.submitted && product_description.invalid) || product_description.touched){
-          <mat-error>
-            Valid category is required
-          </mat-error>
+        <textarea
+          matInput
+          placeholder="Enter product description"
+          ngModel
+          name="product_description"
+          #product_description="ngModel"
+          required
+        ></textarea>
+        @if((AddProductForm.submitted && product_description.invalid) ||
+        product_description.touched){
+        <mat-error> Valid category is required </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Category</mat-label>
+        <mat-select ngModel name="category" #category="ngModel" required>
+          <mat-option *ngFor="let cat of category_list" [value]="cat.id">
+            {{ cat.category_name }}
+          </mat-option>
+        </mat-select>
+        @if((AddProductForm.submitted && category.invalid) || category.touched){
+        <mat-error> Category is required </mat-error>
         }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Price</mat-label>
-        <input matInput type="number" placeholder="Enter product price" ngModel name="product_price" #product_price="ngModel" required>
-         @if((AddProductForm.submitted && product_price.invalid) || product_price.touched){
-          <mat-error>
-            Valid category is required
-          </mat-error>
+        <input
+          matInput
+          type="number"
+          placeholder="Enter product price"
+          ngModel
+          name="product_price"
+          #product_price="ngModel"
+          required
+        />
+        @if((AddProductForm.submitted && product_price.invalid) || product_price.touched){
+        <mat-error> Valid category is required </mat-error>
         }
       </mat-form-field>
 
-      <button [disabled]="AddProductForm.invalid " mat-raised-button color="accent" class="full-width">Create Product</button>
+      <button
+        [disabled]="AddProductForm.invalid"
+        mat-raised-button
+        color="accent"
+        class="full-width"
+      >
+        Create Product
+      </button>
     </form>
   </mat-card>
 </div>

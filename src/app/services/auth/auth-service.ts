@@ -33,9 +33,9 @@ export class AuthService {
   }
 
   loggoutUser(){
+    this.router.navigate(['login'])
     this.isLoggedIn = false
     this.isLoggedInStatusListener.next(false)
-    this.router.navigate(['login'])
   }
 
   getLoginStatus(){
