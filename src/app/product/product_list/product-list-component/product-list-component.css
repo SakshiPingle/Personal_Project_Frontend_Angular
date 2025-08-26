@@ -30,7 +30,8 @@ html, body {
 }
 
 .searchbox {
-  width: 250px;
+  margin-left: 10px;
+  width: 345px;
 }
 
 .upload-section {
@@ -77,4 +78,28 @@ mat-paginator {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* .toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  justify-content: space-between; 
+} */
+
+.report-download button {
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.report-download{
+  
+}
+
+.report-div{
+  display: flex;
 }

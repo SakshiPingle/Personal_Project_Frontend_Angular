@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
+import { timeout, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +48,12 @@ export class ProductService {
   uploadExcel(file: File): Observable<any> {
     const formData = new FormData();
     formData.append("file", file);
-    return this.http.post(`${this.baseUrl}/upload-excel`, formData);
+    return this.http.post(`${this.baseUrl}/upload_excel`, formData);
+  }
+
+  downloadReport() {
+   return this.http.get(`${this.baseUrl}/download_report`, {
+    responseType: 'blob'
+  });
   }
 }

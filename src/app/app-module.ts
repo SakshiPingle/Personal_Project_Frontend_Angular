@@ -23,6 +23,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
 // for routing 
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';@NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

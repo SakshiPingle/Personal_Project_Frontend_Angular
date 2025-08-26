@@ -109,12 +109,29 @@ openFilePicker(fileInput: HTMLInputElement) {
   fileInput.click();
 }
 
-  
+
+downloadReport() {
+  this.productService.downloadReport().subscribe({
+    next: (blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'products-report.xlsx'; // 👈 forces auto download to Downloads
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    },
+    error: () => {
+      console.error("Download failed");
+    }
+  });
+}
 
  ngOnDestroy(){
   this.loginListerSub.unsubscribe();
  }
-
+ 
  
 
 }

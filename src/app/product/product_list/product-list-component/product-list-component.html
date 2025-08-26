@@ -24,7 +24,14 @@
       <mat-label>Search Products or Categories</mat-label>
       <input matInput [(ngModel)]="search" (keyup)="onSearchChange()" placeholder="Enter keyword" />
     </mat-form-field>
-  }
+    
+
+   }
+   <div class="report-div">
+             <!-- report download -->
+    <div class="report-download">
+      <button mat-raised-button color="primary" (click)="downloadReport()">Download Report</button>
+    </div>
     <!-- file upload -->
     <div class="upload-section">
       <input type="file" #fileInput (change)="onFileSelected($event)" accept=".xlsx,.xls" hidden />
@@ -32,10 +39,14 @@
       <span class="file-name" *ngIf="selectedFile">{{ selectedFile.name }}</span>
       <button mat-raised-button color="primary" (click)="uploadFile()" [disabled]="!selectedFile">Upload</button>
     </div>
+
+
+  </div>
   </div>
 
   <!-- message -->
   <p class="upload-message">{{ message }}</p>
+
 
   <!-- scrollable products -->
   <div class="product-grid-container">
@@ -59,6 +70,7 @@
     </div>
   </div>
 
+
   <!-- paginator stays fixed below scroll -->
   @if(products_list.length > 0){
   <mat-paginator
@@ -69,3 +81,4 @@
   ></mat-paginator>
   }
 </div>
+
