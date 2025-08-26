@@ -1,4 +1,5 @@
 <div class="product-list">
+  <div style="height: 30vh;">
   @if(products_list.length > 0){
   <h2>Product List</h2>
   } @if(products_list.length <= 0){
@@ -52,6 +53,8 @@
 
   <!-- message -->
   <p class="upload-message">{{ message }}</p>
+  </div>
+  
 
   <!-- scrollable products -->
   <div class="product-grid-container">
@@ -83,6 +86,7 @@
   <!-- paginator stays fixed below scroll -->
   @if(products_list.length > 0){
   <mat-paginator
+    class="paginator"
     [length]="totalProductLength"
     [pageSize]="productPageSizeSelectedForPagination"
     [pageSizeOptions]="pageSizeOptionsForPagination"
