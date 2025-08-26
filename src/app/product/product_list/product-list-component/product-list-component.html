@@ -31,28 +31,11 @@
           Download Report
         </button>
       </div>
-      <!-- file upload -->
-      <div class="upload-section">
-        <input
-          type="file"
-          #fileInput
-          (change)="onFileSelected($event)"
-          accept=".xlsx,.xls"
-          hidden
-        />
-        <button mat-raised-button color="accent" (click)="openFilePicker(fileInput)">
-          Choose File
-        </button>
-        <span class="file-name" *ngIf="selectedFile">{{ selectedFile.name }}</span>
-        <button mat-raised-button color="primary" (click)="uploadFile()" [disabled]="!selectedFile">
-          Upload
-        </button>
-      </div>
+
     </div>
   </div>
 
-  <!-- message -->
-  <p class="upload-message">{{ message }}</p>
+
   </div>
   
 

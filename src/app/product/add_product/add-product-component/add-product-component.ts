@@ -22,6 +22,9 @@ export class AddProductComponent implements OnInit {
   category_list: Category[] = [];
   productDetailsForEdit:any;
   mode = 'create'
+  // file upload 
+selectedFile?: File;
+message = "";
    constructor(
     private productService: ProductService,
     private router: Router,
@@ -79,13 +82,35 @@ export class AddProductComponent implements OnInit {
     }else if(this.mode == 'create'){
       let product_details = form.value;
       this.productService.createProduct(product_details);
-    }
-  
-
-
-
-    } else {
+    }} else {
       alert('Error While adding new product');
     }
   }
+
+
+    onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+ uploadFile() {
+    if (!this.selectedFile) {
+      this.message = "Please select a file first";
+      return;
+    }
+    this.productService.uploadExcel(this.selectedFile).subscribe({
+    next: (res) => {
+    this.message = res.message + " (" + res.totalRecords + " records)";
+  },
+  error: () => {
+    this.message = "Upload failed";
+  }
+});
+  }
+
+  
+openFilePicker(fileInput: HTMLInputElement) {
+  fileInput.value = ''; // reset so user can reselect same file
+  fileInput.click();
+}
+
 }

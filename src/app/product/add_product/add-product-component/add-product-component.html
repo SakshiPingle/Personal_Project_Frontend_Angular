@@ -6,7 +6,7 @@
     <h2>Edit Product</h2>
     }
 
-    <form #AddProductForm="ngForm" (submit)="AddProduct(AddProductForm)">
+    <form #AddProductForm="ngForm" (submit)="AddProduct(AddProductForm)" style="margin-bottom: -13px;">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Product Name</mat-label>
         <input
@@ -90,5 +90,28 @@
       </button>
       }
     </form>
+    @if(mode == 'create'){
+<h3 class="orHtag">OR</h3>
+          <!-- file upload -->
+      <div class="upload-section">
+        <input
+          type="file"
+          #fileInput
+          (change)="onFileSelected($event)"
+          accept=".xlsx,.xls"
+          hidden
+        />
+        <button mat-raised-button color="accent" (click)="openFilePicker(fileInput)" style="margin-right: 10px;width: 11.5vw;">
+          Choose File
+        </button>
+        <button mat-raised-button color="primary" (click)="uploadFile()" [disabled]="!selectedFile" style="width: 11.5vw;">
+          Upload
+        </button>
+        <span class="file-name" *ngIf="selectedFile && !message">{{ selectedFile.name }}</span>
+          <!-- message -->
+       <p class="upload-message">{{ message }}</p>
+      </div>
+    }
+    
   </mat-card>
 </div>

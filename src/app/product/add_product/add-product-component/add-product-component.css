@@ -20,3 +20,9 @@ h2 {
   width: 100%;
   margin-bottom: 15px;
 }
+
+.orHtag{
+  margin: 10px;
+  display: flex; 
+  justify-content: center;
+}
