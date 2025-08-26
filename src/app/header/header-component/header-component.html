@@ -1,15 +1,15 @@
 <mat-toolbar color="primary" class="toolbar">
   <span class="logo">My App</span>
   <span class="spacer"></span>
-  <a mat-button routerLink="/">Products</a>
-  <a mat-button routerLink="/category">Categories</a>
+  <a mat-button routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Products</a>
+  <a mat-button routerLink="/category" routerLinkActive="active-link">Categories</a>
   @if(userIsAuthenticated){
-    <a mat-button routerLink="/add-product">Add Product</a>
-    <a mat-button routerLink="/add-categpry">Add Category</a>
+    <a mat-button routerLink="/add-product" routerLinkActive="active-link">Add Product</a>
+    <a mat-button routerLink="/add-categpry" routerLinkActive="active-link">Add Category</a>
   }
    @if(!userIsAuthenticated){
-  <a mat-button routerLink="/login">Login</a>
-  <a mat-button routerLink="/registration">Register</a>
+  <a mat-button routerLink="/login" routerLinkActive="active-link">Login</a>
+  <a mat-button routerLink="/registration" routerLinkActive="active-link">Register</a>
   }
   @if(userIsAuthenticated){
       <a mat-button (click)="onLogout()"> Logout</a>

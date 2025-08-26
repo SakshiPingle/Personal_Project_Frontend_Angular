@@ -25,3 +25,9 @@ a[mat-button]:hover {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
 }
+
+.active-link {
+  background-color: #ffffff20; /* transparent white highlight */
+  border-bottom: 2px solid #ffcc00; /* yellow underline */
+  font-weight: bold;
+}
