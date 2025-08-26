@@ -1,13 +1,29 @@
 <div class="category-list">
   <h2>Categories</h2>
-
+<div class="category-grid-container">
+ <div class="category-grid">
   <mat-card class="category-card" *ngFor="let category of categories">
     <mat-card-title>{{ category.category_name }}</mat-card-title>
     @if(userIsAuthenticated){
       <mat-card-actions>
-        <button mat-raised-button color="primary" [routerLink]="['/edit-category',category.id]">Edit</button>
-        <button mat-stroked-button color="warn" (click)="deleteCategory(category)">Delete</button>
+        <button mat-raised-button color="primary" [routerLink]="['/edit-category',category.id]" style="margin-right: 10px;">Edit</button>
+        <button mat-stroked-button color="warn" (click)="openDeleteDialog(category)">Delete</button>
       </mat-card-actions>
     }
   </mat-card>
+ </div>
 </div>
+
+
+</div>
+        <ng-template #deleteDialog let-data let-dialogRef="dialogRef">
+          <h2 mat-dialog-title>Delete Category</h2>
+          <mat-dialog-content>
+            Would you like to delete <b>{{ data.category_name }}</b
+            >?
+          </mat-dialog-content>
+          <mat-dialog-actions align="end">
+            <button mat-button (click)="dialogRef.close(false)">No</button>
+            <button mat-button color="warn" (click)="dialogRef.close(true)">Yes</button>
+          </mat-dialog-actions>
+        </ng-template>

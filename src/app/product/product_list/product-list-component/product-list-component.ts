@@ -1,10 +1,10 @@
-import { Component , OnInit,OnDestroy} from '@angular/core';
+import { Component , OnInit,OnDestroy,ViewChild, TemplateRef} from '@angular/core';
 import { AuthService } from '../../../services/auth/auth-service';
 import {Subscription} from 'rxjs'
 import { ProductService } from '../../../services/product/product-service';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
-
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-product-list-component',
   standalone: false,
@@ -12,6 +12,7 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrl: './product-list-component.css'
 })
 export class ProductListComponent implements OnInit,OnDestroy{
+ @ViewChild('deleteDialog') deleteDialog!: TemplateRef<any>;
 // for pagination 
 totalProductLength = 0;
 productPageSizeSelectedForPagination = 10
@@ -32,6 +33,7 @@ message = "";
     private authService : AuthService,
     private productService : ProductService,
     private router : Router,
+    private dialog: MatDialog
   ){}
 
   private loginListerSub = new Subscription;
@@ -55,6 +57,21 @@ message = "";
 
   })
  }
+
+   // ✅ open confirm dialog before deleting
+  openDeleteDialog(product: any) {
+    const dialogRef = this.dialog.open(this.deleteDialog, {
+      width: '300px',
+      data: product,
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteProduct(product);
+      }
+    });
+  }
 
  deleteProduct(product : any){
   this.productService.deleteProduct(product)

@@ -1,15 +1,12 @@
 <div class="product-list">
-@if(products_list.length > 0){
+  @if(products_list.length > 0){
   <h2>Product List</h2>
-} 
-@if(products_list.length <= 0){
+  } @if(products_list.length <= 0){
   <h2>Add Products</h2>
-}
-
-
+  }
 
   <div class="toolbar">
-   @if(products_list.length > 0){
+    @if(products_list.length > 0){
     <!-- sorting -->
     <mat-form-field appearance="outline">
       <mat-label>Sort by Price</mat-label>
@@ -24,29 +21,37 @@
       <mat-label>Search Products or Categories</mat-label>
       <input matInput [(ngModel)]="search" (keyup)="onSearchChange()" placeholder="Enter keyword" />
     </mat-form-field>
-    
 
-   }
-   <div class="report-div">
-             <!-- report download -->
-    <div class="report-download">
-      <button mat-raised-button color="primary" (click)="downloadReport()">Download Report</button>
+    }
+    <div class="report-div">
+      <!-- report download -->
+      <div class="report-download">
+        <button mat-raised-button color="primary" (click)="downloadReport()">
+          Download Report
+        </button>
+      </div>
+      <!-- file upload -->
+      <div class="upload-section">
+        <input
+          type="file"
+          #fileInput
+          (change)="onFileSelected($event)"
+          accept=".xlsx,.xls"
+          hidden
+        />
+        <button mat-raised-button color="accent" (click)="openFilePicker(fileInput)">
+          Choose File
+        </button>
+        <span class="file-name" *ngIf="selectedFile">{{ selectedFile.name }}</span>
+        <button mat-raised-button color="primary" (click)="uploadFile()" [disabled]="!selectedFile">
+          Upload
+        </button>
+      </div>
     </div>
-    <!-- file upload -->
-    <div class="upload-section">
-      <input type="file" #fileInput (change)="onFileSelected($event)" accept=".xlsx,.xls" hidden />
-      <button mat-raised-button color="accent" (click)="openFilePicker(fileInput)">Choose File</button>
-      <span class="file-name" *ngIf="selectedFile">{{ selectedFile.name }}</span>
-      <button mat-raised-button color="primary" (click)="uploadFile()" [disabled]="!selectedFile">Upload</button>
-    </div>
-
-
-  </div>
   </div>
 
   <!-- message -->
   <p class="upload-message">{{ message }}</p>
-
 
   <!-- scrollable products -->
   <div class="product-grid-container">
@@ -54,7 +59,9 @@
       <mat-card class="product-card" *ngFor="let product of products_list">
         <mat-card-header>
           <mat-card-title>Product Name : {{ product.product_name }}</mat-card-title>
-          <mat-card-subtitle>Product Category : {{ product.category.category_name }}</mat-card-subtitle>
+          <mat-card-subtitle
+            >Product Category : {{ product.category.category_name }}</mat-card-subtitle
+          >
         </mat-card-header>
         <mat-card-content>
           <p>Product Description : {{ product.product_description }}</p>
@@ -62,14 +69,16 @@
         </mat-card-content>
         @if(userIsAuthenticated){
         <mat-card-actions>
-          <button mat-raised-button color="primary" [routerLink]="['/edit-product', product.id]">Edit</button>
-          <button mat-stroked-button color="warn" (click)="deleteProduct(product)">Delete</button>
+          <button mat-raised-button color="primary" [routerLink]="['/edit-product', product.id]" style="margin-right: 10px;">
+            Edit
+          </button>
+          <button mat-stroked-button color="warn" (click)="openDeleteDialog(product)">Delete</button>
         </mat-card-actions>
         }
+
       </mat-card>
     </div>
   </div>
-
 
   <!-- paginator stays fixed below scroll -->
   @if(products_list.length > 0){
@@ -81,4 +90,14 @@
   ></mat-paginator>
   }
 </div>
-
+        <ng-template #deleteDialog let-data let-dialogRef="dialogRef">
+          <h2 mat-dialog-title>Delete Product</h2>
+          <mat-dialog-content>
+            Would you like to delete <b>{{ data.product_name }}</b
+            >?
+          </mat-dialog-content>
+          <mat-dialog-actions align="end">
+            <button mat-button (click)="dialogRef.close(false)">No</button>
+            <button mat-button color="warn" (click)="dialogRef.close(true)">Yes</button>
+          </mat-dialog-actions>
+        </ng-template>

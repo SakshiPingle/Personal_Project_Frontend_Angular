@@ -55,11 +55,11 @@ html, body {
 }
 
 .product-grid-container {
-  flex: 1; /* 👈 fill available space */
-  overflow-y: auto; /* 👈 only this part scrolls */
-  padding: 10px 0;
-  max-height: 338px;
-  min-height: 338px;
+      flex: 1;
+    overflow-y: auto;
+    padding: 0px 0;
+    max-height: 403px;
+    min-height: 403px;
 }
 
 .product-grid {
@@ -96,9 +96,6 @@ mat-paginator {
   margin-right: 10px;
 }
 
-.report-download{
-  
-}
 
 .report-div{
   display: flex;
